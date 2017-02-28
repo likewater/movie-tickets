@@ -3,14 +3,19 @@ function movieGoer(movie, time, age, price) {
   this.movieTitle = movie;
   this.movieTime = time;
   this.userAge = age;
-  this.ticketPrice = 10;
 }
 
 movieGoer.prototype.applyDiscount = function() {
-  this.movieTime === "matinee" ?
-  (this.userAge === "adult" ? console.log(this.ticketPrice * .9)
-    :console.log(this.ticketPrice * .8))
-  : console.log(this.ticketPrice);
+  var ticketPrice = 10;
+  if (this.movieTitle === "movieTitle1") {
+    ticketPrice = ticketPrice * 1.2 }
+  if (this.userAge !== "adult") {
+    ticketPrice = ticketPrice * .9 }
+  if (this.movieTime === "matinee") {
+    ticketPrice = ticketPrice * .9 }
+
+  //return (ticketPrice - (10 * .1));
+  return ticketPrice;
 }
 
 //user interface logic
@@ -23,5 +28,6 @@ $(document).ready(function() {
     var userAge = $("input:radio[name=age]:checked").val();
     var customer = new movieGoer(movieTitle, movieTime, userAge);
     var ticketPrice = customer.applyDiscount();
+    console.log(ticketPrice);
   });
 });
